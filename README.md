@@ -24,7 +24,7 @@ From github.com:NeuromancerNet/spring-boot-demo-cmdline
 ```
 
 * resolve merge conflicts 
-    * TortoiseGit is quite efficient for this task
     * use theirs as long as changes are on demo-cmdline exclusive package **br.net.neuromancer.cmdline**
     * be careful when merging changes to common files (e.g. pom.xml)
+    * TortoiseGit is quite efficient for this task
     
