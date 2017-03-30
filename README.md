@@ -10,6 +10,8 @@ It's [a bit trickier than expected](http://bitdrift.com/post/4534738938/fork-you
 
 * Make changes to br.net.neuromancer.cmdline.EntryPoint according to Spring Boot demo Cmdline
 * commit changes
+* fetch from upstream
+
 
 ```bash
 $ git fetch upstream
@@ -20,3 +22,9 @@ Unpacking objects: 100% (10/10), done.
 From github.com:NeuromancerNet/spring-boot-demo-cmdline
    ceacc66..fb13d5b  master     -> upstream/master
 ```
+
+* resolve merge conflicts 
+    * TortoiseGit is quite efficient for this task
+    * use theirs as long as changes are on demo-cmdline exclusive package **br.net.neuromancer.cmdline**
+    * be careful when merging changes to common files (e.g. pom.xml)
+    
