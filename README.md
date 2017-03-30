@@ -29,3 +29,40 @@ From github.com:NeuromancerNet/spring-boot-demo-cmdline
     * be careful when merging changes to common files (e.g. pom.xml)
     * TortoiseGit is quite efficient for this task
     
+
+# Roadmap for Benerator Integration
+
+* extract the logic from **org.databene.benerator.main.Benerator**
+
+'''java
+	public static void runFile(String filename, InfoPrinter printer) throws IOException {
+		BeneratorMonitor.INSTANCE.reset();
+		MemorySensor memProfiler = MemorySensor.getInstance();
+		memProfiler.reset();
+		if (printer != null) {
+			printer.printLines("Running file " + filename);
+			BeneratorUtil.checkSystem(printer);
+		}
+		BeneratorContext context = BeneratorFactory.getInstance().createContext(IOUtil.getParentUri(filename));
+		DescriptorRunner runner = new DescriptorRunner(filename, context);
+		try {
+			runner.run();
+		} finally {
+			IOUtil.close(runner);
+		}
+		BeneratorUtil.logConfig("Max. committed heap size: " + new KiloFormatter(1024).format(memProfiler.getMaxCommittedHeapSize()) + "B");
+	}
+'''
+
+* create *BeneratorSpringWrapper* annotated with [@Component](http://howtodoinjava.com/spring/spring-core/how-to-use-spring-component-repository-service-and-controller-annotations/)
+* @Autowire *BeneratorSpringWrapper* on the Entrypoint 
+* create holder *BeneratorParameterStream* String, InputStream
+* create @Component *BeneratorFileUtils*
+* implement method void createTempFileFromStreams(ArrayList<BeneratorParameterStream>) [inspired here](http://stackoverflow.com/questions/4317035/how-to-convert-inputstream-to-virtual-file)
+* inject *BeneratorFileUtils* into *BeneratorSpringWrapper* constructor
+* implement method void *BeneratorSpringWrapper.run(String scriptFilePath)*
+* overload void *BeneratorSpringWrapper.run(ArrayList<BeneratorParameterStream>)*
+* write tests for everything
+
+
+
