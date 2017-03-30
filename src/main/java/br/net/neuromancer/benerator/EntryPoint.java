@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+
 public class EntryPoint {
 	
 	private static Logger logger = LoggerFactory.getLogger(EntryPoint.class);
