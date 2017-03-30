@@ -11,6 +11,7 @@ It's [a bit trickier than expected](http://bitdrift.com/post/4534738938/fork-you
 * Make changes to br.net.neuromancer.cmdline.EntryPoint according to Spring Boot demo Cmdline
 * commit changes
 * fetch from upstream
+    * bash prompt is more reliable for this task
 
 
 ```bash
