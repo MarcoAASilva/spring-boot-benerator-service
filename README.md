@@ -34,7 +34,7 @@ From github.com:NeuromancerNet/spring-boot-demo-cmdline
 
 * extract the logic from **org.databene.benerator.main.Benerator**
 
-'''java
+```java
 	public static void runFile(String filename, InfoPrinter printer) throws IOException {
 		BeneratorMonitor.INSTANCE.reset();
 		MemorySensor memProfiler = MemorySensor.getInstance();
@@ -52,15 +52,15 @@ From github.com:NeuromancerNet/spring-boot-demo-cmdline
 		}
 		BeneratorUtil.logConfig("Max. committed heap size: " + new KiloFormatter(1024).format(memProfiler.getMaxCommittedHeapSize()) + "B");
 	}
-'''
+```
 
 * create *BeneratorSpringWrapper* annotated with [@Component](http://howtodoinjava.com/spring/spring-core/how-to-use-spring-component-repository-service-and-controller-annotations/)
+* implement method void *BeneratorSpringWrapper.run(String scriptFilePath)* (use extracted logic)
 * @Autowire *BeneratorSpringWrapper* on the Entrypoint 
 * create holder *BeneratorParameterStream* String, InputStream
 * create @Component *BeneratorFileUtils*
 * implement method void createTempFileFromStreams(ArrayList<BeneratorParameterStream>) [inspired here](http://stackoverflow.com/questions/4317035/how-to-convert-inputstream-to-virtual-file)
 * inject *BeneratorFileUtils* into *BeneratorSpringWrapper* constructor
-* implement method void *BeneratorSpringWrapper.run(String scriptFilePath)*
 * overload void *BeneratorSpringWrapper.run(ArrayList<BeneratorParameterStream>)*
 * write tests for everything
 
